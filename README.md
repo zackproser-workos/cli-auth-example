@@ -17,7 +17,7 @@ A runnable demo of browser-based OAuth authentication flows in command-line appl
 
 ```bash
 # Clone the repository
-git clone https://github.com/workos/oauth-cli-demo.git
+git clone https://github.com/zackproser-workos/cli-auth-example.git
 cd oauth-cli-demo
 # Install dependencies
 npm install
