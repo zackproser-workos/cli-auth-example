@@ -13,6 +13,74 @@ A runnable demo of browser-based OAuth authentication flows in command-line appl
 
 ![authentication successful page](./img/auth-successful.webp)
 
+## Usage Example
+
+Running `npm start login` will start the authentication flow:
+
+```console
+   ╭───────────────────────────────╮
+   │                               │
+   │   WorkOS CLI Authentication   │
+   │                               │
+   ╰───────────────────────────────╯
+
+⠋ Starting authentication flow...
+→ Local server started
+→ Opening browser for authentication
+⠋ Waiting for authentication...
+→ Received authorization code
+⠼ Processing authentication...
+
+✓ Authentication successful
+
+Token Storage Details:
+📁 Created new directory: /Users/zachary/.workos
+💾 Token saved to: /Users/zachary/.workos/token
+
+🔍 View token contents with:
+   cat ~/.workos/token
+```
+
+This will:
+1. Start a local server
+2. Open your browser for WorkOS authentication
+3. Process the authentication response
+4. Save your access token locally
+## Usage Example
+
+Running `npm start login` will start the authentication flow:
+
+```console
+   ╭───────────────────────────────╮
+   │                               │
+   │   WorkOS CLI Authentication   │
+   │                               │
+   ╰───────────────────────────────╯
+
+⠋ Starting authentication flow...
+→ Local server started
+→ Opening browser for authentication
+⠋ Waiting for authentication...
+→ Received authorization code
+⠼ Processing authentication...
+
+✓ Authentication successful
+
+Token Storage Details:
+📁 Created new directory: /Users/zachary/.workos
+💾 Token saved to: /Users/zachary/.workos/token
+
+🔍 View token contents with:
+   cat ~/.workos/token
+```
+
+This will:
+1. Start a local server
+2. Open your browser for WorkOS authentication
+3. Process the authentication response
+4. Save your access token locally
+
+
 ## Installation
 
 ```bash
@@ -135,36 +203,3 @@ Test files are located in `src/__tests__/` and follow the naming convention `*.t
 - Environment variable validation
 - UI components
 
-## Usage Example
-
-Running `npm start login` will start the authentication flow:
-
-```console
-   ╭───────────────────────────────╮
-   │                               │
-   │   WorkOS CLI Authentication   │
-   │                               │
-   ╰───────────────────────────────╯
-
-⠋ Starting authentication flow...
-→ Local server started
-→ Opening browser for authentication
-⠋ Waiting for authentication...
-→ Received authorization code
-⠼ Processing authentication...
-
-✓ Authentication successful
-
-Token Storage Details:
-📁 Created new directory: /Users/zachary/.workos
-💾 Token saved to: /Users/zachary/.workos/token
-
-🔍 View token contents with:
-   cat ~/.workos/token
-```
-
-This will:
-1. Start a local server
-2. Open your browser for WorkOS authentication
-3. Process the authentication response
-4. Save your access token locally
