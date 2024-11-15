@@ -28,6 +28,8 @@ Add your WorkOS credentials to `.env.local`:
 ```plaintext
 WORKOS_CLIENT_ID=client_xxxxxxxxxxxx
 WORKOS_API_KEY=sk_xxxxxxxxxxxx
+# Optional: Set a custom token directory or leave unset to use default: ~/.workos
+WORKOS_TOKEN_DIR=/path/to/token/directory
 ```
 
 ## Usage
@@ -83,3 +85,27 @@ This CLI demonstrates the common pattern used by tools like GitHub's CLI (`gh`) 
 3. Commit your changes (`git commit -m 'Add some amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
+
+## WorkOS CLI OAuth Demo
+
+## Configuration
+
+The CLI can be configured using environment variables:
+
+| Variable | Required | Default | Description |
+|----------|----------|---------|-------------|
+| WORKOS_API_KEY | Yes | - | Your WorkOS API Key |
+| WORKOS_CLIENT_ID | Yes | - | Your WorkOS Client ID |
+| WORKOS_TOKEN_DIR | No | ~/.workos | Directory where the authentication token will be stored |
+
+## Token Storage
+
+By default, the CLI stores the authentication token in `~/.workos/token`. You can customize this location by setting the `WORKOS_TOKEN_DIR` environment variable.
+
+### Custom Token Directory
+
+To use a custom directory for token storage:
+
+```bash
+export WORKOS_TOKEN_DIR=/custom/path/to/token/directory
+```
