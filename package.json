@@ -1,0 +1,29 @@
+{
+  "name": "oauth-cli-demo",
+  "version": "1.0.0",
+  "description": "Demo CLI showing browser-based OAuth flow with AuthKit",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "prebuild": "rm -rf dist",
+    "prepare": "npm run build"
+  },
+  "dependencies": {
+    "@auth/core": "^0.18.0",
+    "blessed": "^0.1.81",
+    "commander": "^11.0.0",
+    "open": "^9.1.0",
+    "keytar": "^7.9.0",
+    "@workos-inc/node": "7.31.0",
+    "dotenv": "^16.0.0"
+  },
+  "devDependencies": {
+    "@types/blessed": "^0.1.22",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "ts-node": "^10.9.1"
+  }
+} 
