@@ -1,13 +1,17 @@
 # OAuth CLI Demo
 
-A professional demonstration of browser-based OAuth authentication flows in command-line applications, powered by WorkOS AuthKit.
+A runnable demo of browser-based OAuth authentication flows in command-line applications, powered by [WorkOS](https://workos.com) [AuthKit](https://authkit.com).
+
+![CLI browser-based auth demo](./img/command-line-auth.webp)
 
 ## Features
 
 - 🔐 Secure browser-based OAuth authentication
-- 💾 Persistent token storage in system keychain
-- 🎨 Interactive terminal animations
 - 🔒 WorkOS AuthKit integration
+- 💾 Persistent token storage in system keychain
+- 🎨 Stylized authentication successful page 
+
+![authentication successful page](./img/auth-successful.webp)
 
 ## Installation
 
