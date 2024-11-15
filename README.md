@@ -113,3 +113,24 @@ To use a custom directory for token storage:
 ```bash
 export WORKOS_TOKEN_DIR=/custom/path/to/token/directory
 ```
+
+## Testing
+
+The project includes a comprehensive test suite using Jest. You can run tests using the following commands:
+
+```bash
+# Run all tests
+npm test
+
+# Run tests in watch mode (useful during development)
+npm run test:watch
+
+# Run tests with coverage report
+npm run test:coverage
+```
+
+Test files are located in `src/__tests__/` and follow the naming convention `*.test.ts`. The suite includes tests for:
+- OAuth authentication flow
+- Token storage and retrieval
+- Environment variable validation
+- UI components
