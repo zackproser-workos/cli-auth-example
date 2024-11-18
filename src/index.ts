@@ -1,6 +1,7 @@
 import { config } from 'dotenv';
 import { Command } from 'commander';
 import { login } from './commands/login.js';
+import { getProfile } from './commands/profile.js';
 import { validateEnv } from './utils/env.js';
 
 // Load environment variables from .env.local
@@ -20,5 +21,10 @@ program
   .command('login')
   .description('Login using OAuth')
   .action(login);
+
+program
+  .command('me')
+  .description('Get authenticated user profile')
+  .action(getProfile);
 
 program.parse(); 

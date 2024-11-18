@@ -15,6 +15,8 @@ A runnable demo of browser-based OAuth authentication flows in command-line appl
 
 ## Usage Example
 
+1. First, authenticate with WorkOS:
+
 Running `npm start login` will start the authentication flow:
 
 ```console
@@ -47,6 +49,27 @@ This will:
 3. Process the authentication response
 4. Save your access token locally
 
+2. After successful authentication, you can fetch your user profile:
+
+```bash
+npm start me
+```
+
+Example output:
+
+```
+🧑 User Profile:
+Email: booker@example.com
+First Name: Booker
+Last Name: DeWitt
+ID: user_02JCQ1E9ZV4JQXNCT0TD4V7DJ3
+Created At: 11/14/2024, 11:30:56 PM
+```
+
+This demonstrates:
+1. The OAuth authentication flow with WorkOS AuthKit
+2. Secure token storage in your system keychain
+3. Using the stored credentials to make authenticated API calls
 
 ## Installation
 

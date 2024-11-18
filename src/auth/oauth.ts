@@ -7,7 +7,7 @@ import { readFileSync } from 'fs';
 import { join } from 'path';
 import open from 'open';
 import { WorkOS } from '@workos-inc/node';
-import { WORKOS_DIR, saveToken } from './storage.js';
+import { WORKOS_DIR, saveAuthData } from './storage.js';
 
 dotenv.config({ path: '.env.local' });
 
@@ -96,15 +96,18 @@ async function handleCallback(
     console.log('Code:', code);
     spinner.text = chalk.blue('Processing authentication...');
     
-    const { accessToken } = await workos.userManagement.authenticateWithCode({
+    const authResponse = await workos.userManagement.authenticateWithCode({
       code,
       clientId: process.env.WORKOS_CLIENT_ID || '',
     });
     
-    console.log('Authentication response received:', accessToken ? 'success' : 'failed');
+    console.log('Authentication response received:', authResponse.accessToken ? 'success' : 'failed');
     
     console.log('About to save token...');
-    const { tokenPath, dirCreated } = await saveToken(accessToken);
+    await saveAuthData({
+      accessToken: authResponse.accessToken,
+      userId: authResponse.user.id
+    });
     console.log('Token saved successfully');
     
     // Send success page response
@@ -114,11 +117,11 @@ async function handleCallback(
     
     spinner.stop();
     
-    displaySuccessMessage(dirCreated, tokenPath);
+    displaySuccessMessage();
     
     server.close(() => {
       console.log('Server closed successfully');
-      resolve(accessToken);
+      resolve(authResponse.accessToken);
     });
   } catch (error) {
     handleError(error, 'Authentication error', spinner, server, res, reject);
@@ -141,10 +144,9 @@ function handleError(
   reject(error);
 }
 
-function displaySuccessMessage(dirCreated: boolean, tokenPath: string) {
+function displaySuccessMessage() {
   console.log(chalk.green('\n✓ Authentication successful'));
   console.log(chalk.cyan('\nToken Storage Details:'));
-  console.log(`${dirCreated ? '📁 Created new' : '📂 Using existing'} directory: ${WORKOS_DIR}`);
-  console.log(`💾 Token saved to: ${tokenPath}`);
+  console.log(`📁 Created new directory: ${WORKOS_DIR}`);
   console.log(`\n🔍 View token contents with:\n   ${chalk.bold(`cat ~/.workos/token`)}\n`);
 }

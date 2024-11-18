@@ -1,3 +1,4 @@
+/** @type {import('jest').Config} */
 export default {
     preset: 'ts-jest',
     testEnvironment: 'node',
@@ -6,8 +7,12 @@ export default {
       '^(\\.{1,2}/.*)\\.js$': '$1',
     },
     transform: {
-      '^.+\\.tsx?$': ['ts-jest', {
+      '^.+\\.ts$': ['ts-jest', {
         useESM: true,
       }],
     },
+    testMatch: [
+      '<rootDir>/src/**/__tests__/**/*.[jt]s',
+      '<rootDir>/src/**/*.(spec|test).[jt]s'
+    ],
   };

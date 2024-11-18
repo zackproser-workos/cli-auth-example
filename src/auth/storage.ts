@@ -6,11 +6,15 @@ import { homedir } from 'os';
 export const WORKOS_DIR = process.env.WORKOS_TOKEN_DIR || join(homedir(), '.workos');
 const TOKEN_PATH = join(WORKOS_DIR, 'token');
 
-export async function saveToken(token: string): Promise<{ tokenPath: string; dirCreated: boolean }> {
+interface AuthData {
+  accessToken: string;
+  userId: string;
+}
+
+export async function saveAuthData(data: AuthData): Promise<{ tokenPath: string; dirCreated: boolean }> {
   try {
     let dirCreated = false;
     
-    // Check if directory exists before creating it
     try {
       await mkdir(WORKOS_DIR, { recursive: true });
       dirCreated = true;
@@ -20,21 +24,20 @@ export async function saveToken(token: string): Promise<{ tokenPath: string; dir
       }
     }
     
-    // Save the token
-    await writeFile(TOKEN_PATH, token, 'utf-8');
+    // Save the auth data as JSON
+    await writeFile(TOKEN_PATH, JSON.stringify(data), 'utf-8');
     return { tokenPath: TOKEN_PATH, dirCreated };
   } catch (error) {
-    console.error('Error saving token:', error);
+    console.error('Error saving auth data:', error);
     throw error;
   }
 }
 
-export async function getToken(): Promise<string | null> {
+export async function getAuthData(): Promise<AuthData | null> {
   try {
-    const token = await readFile(TOKEN_PATH, 'utf-8');
-    return token;
+    const data = await readFile(TOKEN_PATH, 'utf-8');
+    return JSON.parse(data);
   } catch (error) {
-    // If file doesn't exist or other error, return null
     return null;
   }
 } 
