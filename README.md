@@ -13,9 +13,9 @@ A runnable demo of browser-based OAuth authentication flows in command-line appl
 
 ![authentication successful page](./img/auth-successful.webp)
 
-## Usage Example
+## Usage 
 
-1. First, authenticate with WorkOS:
+### Step 1. Authenticate with WorkOS:
 
 Running `npm start login` will start the authentication flow:
 
@@ -49,7 +49,9 @@ This will:
 3. Process the authentication response
 4. Save your access token locally
 
-2. After successful authentication, you can fetch your user profile:
+### Step 2. Fetch a secure resource using your access token:
+
+Following successful authentication, you can fetch a secure resource using your stored access token:
 
 ```bash
 npm start me
@@ -70,6 +72,50 @@ This demonstrates:
 1. The OAuth authentication flow with WorkOS AuthKit
 2. Secure token storage in your system keychain
 3. Using the stored credentials to make authenticated API calls
+
+### Step 3. Inspect Stored Credentials
+
+View the contents of your stored credentials:
+
+```bash
+npm start keychain
+```
+
+Example output:
+```
+🔐 Keychain Contents:
+Service: workos-cli
+Account: default
+Status: Entry found
+Contents: {
+  "accessToken": "eyJhbGc...X_YphjyXXXXX",
+  "userId": "user_02XXXXXXXXXXXXX"
+}
+```
+
+### Credential Storage Strategy
+
+The CLI implements a secure, multi-tiered storage strategy for authentication credentials:
+
+1. **System Keychain (Primary)**: 
+   - First attempts to store credentials in the system's native keychain
+   - Uses `@napi-rs/keyring` for cross-platform keychain access
+   - macOS: Keychain Access
+   - Windows: Credential Manager
+   - Linux: libsecret/Secret Service API
+
+2. **Encrypted File Fallback**:
+   - If keychain access fails, falls back to encrypted file storage
+   - Files are encrypted using industry-standard AES-256-GCM
+   - Encryption key is derived from machine-specific factors
+   - Similar to GitHub CLI's credential storage approach
+
+This approach mirrors the GitHub CLI (`gh`) implementation, which is considered an industry best practice for CLI tools. The multi-tiered strategy ensures:
+
+- Maximum security by preferring system keychains
+- Broad compatibility across different environments
+- Graceful fallback when keychain access is unavailable
+- Zero configuration required from users
 
 ## Installation
 
@@ -94,21 +140,7 @@ WORKOS_API_KEY=sk_xxxxxxxxxxxx
 WORKOS_TOKEN_DIR=/path/to/token/directory
 ```
 
-## Usage
 
-```bash
-# Build the CLI
-npm run build
-
-# Run the login command
-npm start login
-```
-
-The CLI will:
-1. Launch your default browser for authentication
-2. Start a local server to capture the OAuth callback
-3. Securely store the access token in your system keychain
-4. Display a real-time animation of the authentication progress
 
 ## Development
 
@@ -192,4 +224,5 @@ Test files are located in `src/__tests__/` and follow the naming convention `*.t
 - Token storage and retrieval
 - Environment variable validation
 - UI components
+
 
