@@ -1,6 +1,6 @@
 # OAuth CLI Demo
 
-[![Tests](https://github.com/zackproser-workos/cli-auth-example/actions/workflows/test.yml/badge.svg)](https://github.com/johndoe/awesome-project/actions/workflows/test.yml)
+[![Tests](https://github.com/zackproser-workos/cli-auth-example/actions/workflows/test.yml/badge.svg)](https://github.com/zackproser-workos/cli-auth-example/actions/workflows/test.yml)
 
 A runnable demo of browser-based OAuth authentication flows in command-line applications, powered by [WorkOS](https://workos.com) [AuthKit](https://authkit.com).
 
