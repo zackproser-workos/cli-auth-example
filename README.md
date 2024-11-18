@@ -33,14 +33,15 @@ Running `npm start login` will start the authentication flow:
 → Received authorization code
 ⠼ Processing authentication...
 
-✓ Authentication successful
+About to save token...
+→ Successfully stored credentials in system keychain
+Token saved successfully
 
 Token Storage Details:
-📁 Created new directory: /Users/zachary/.workos
-💾 Token saved to: /Users/zachary/.workos/token
+🔐 Credentials saved to system keychain
 
-🔍 View token contents with:
-   cat ~/.workos/token
+🔍 View stored credentials with:
+   npm start keychain
 ```
 
 This will:

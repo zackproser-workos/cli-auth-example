@@ -104,7 +104,7 @@ async function handleCallback(
     console.log('Authentication response received:', authResponse.accessToken ? 'success' : 'failed');
     
     console.log('About to save token...');
-    await saveAuthData({
+    const storageResult = await saveAuthData({
       accessToken: authResponse.accessToken,
       userId: authResponse.user.id
     });
@@ -117,7 +117,7 @@ async function handleCallback(
     
     spinner.stop();
     
-    displaySuccessMessage();
+    displaySuccessMessage(storageResult);
     
     server.close(() => {
       console.log('Server closed successfully');
@@ -144,9 +144,18 @@ function handleError(
   reject(error);
 }
 
-function displaySuccessMessage() {
+function displaySuccessMessage(storageResult: { tokenPath: string; dirCreated: boolean }) {
   console.log(chalk.green('\n✓ Authentication successful'));
   console.log(chalk.cyan('\nToken Storage Details:'));
-  console.log(`📁 Created new directory: ${WORKOS_DIR}`);
-  console.log(`\n🔍 View token contents with:\n   ${chalk.bold(`cat ~/.workos/token`)}\n`);
+  
+  if (storageResult.tokenPath === 'system keychain') {
+    console.log(chalk.cyan('🔐 Credentials saved to system keychain'));
+    console.log(`\n🔍 View stored credentials with:\n   ${chalk.bold('npm start keychain')}\n`);
+  } else {
+    if (storageResult.dirCreated) {
+      console.log(`📁 Created new directory: ${WORKOS_DIR}`);
+    }
+    console.log(`💾 Token saved to: ${storageResult.tokenPath}`);
+    console.log(`\n🔍 View token contents with:\n   ${chalk.bold(`cat ${storageResult.tokenPath}`)}\n`);
+  }
 }
